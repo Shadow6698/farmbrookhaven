@@ -1,20 +1,33 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/youngstar"))();
 
-local Window1 = library:CreateWindow("autofarm tickets");
+local Window1 = library:CreateWindow("YoungStar's Lib");
 
 local AutoFarm = false
 
--- Toggle AutoFarm
-Window1:Toggle("AutoFarm", function(state)
-    AutoFarm = state
-end)
-
--- Sistema de verificação de posição com delay
 local targetCoord = Vector3.new(177, 8, -335)
 local triggerCoord = Vector3.new(174, 10, -343)
 local distanceThreshold = 5
 local isTeleporting = false
 
+-- Função para teleportar
+local function teleportToTarget()
+    local player = game.Players.LocalPlayer
+    local char = player.Character or player.CharacterAdded:Wait()
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if root then
+        root.CFrame = CFrame.new(targetCoord)
+    end
+end
+
+-- Toggle AutoFarm
+Window1:Toggle("AutoFarm", function(state)
+    AutoFarm = state
+    if AutoFarm then
+        teleportToTarget() -- Teleporta assim que ativar
+    end
+end)
+
+-- Loop de monitoramento com delay para teleportar automaticamente
 task.spawn(function()
     while true do
         task.wait(0.5)
