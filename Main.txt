@@ -1,6 +1,6 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/youngstar"))();
 
-local Window1 = library:CreateWindow("YoungStar's Lib");
+local Window1 = library:CreateWindow("autofarm tickets");
 
 local AutoFarm = false
 
@@ -20,7 +20,7 @@ local function teleportToTarget()
 end
 
 -- Toggle AutoFarm
-Window1:Toggle("AutoFarm", function(state)
+Window1:Toggle("ticketsfarm=", function(state)
     AutoFarm = state
     if AutoFarm then
         teleportToTarget() -- Teleporta assim que ativar
